@@ -1,6 +1,10 @@
 (ns app.core
   (:require
    [app.spec :as as]
+   ;; try explicit require for `clojure.core.specs.alpha`
+   ;; to fix AOT compilation in combination with `:omit-source` and `:uberjar-exclusions`
+   ;; Unfortunately, it doesn't help
+   [clojure.core.specs.alpha]
    [clojure.core.matrix :as m])
   (:gen-class))
 
