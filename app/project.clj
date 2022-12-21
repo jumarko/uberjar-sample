@@ -21,5 +21,8 @@
                        :omit-source true
                        ;; :omit-source isn't enough;
                        ;; make sure to omit sources from dependencies like analysis lib: https://github.com/technomancy/leiningen/issues/1357
-                       :uberjar-exclusions [#"\.(clj|java)"]
+                       ;; BUT still include clojure/core/specs/alpha.clj because otherwise the core.matrix stuff breaks
+                       ;; when the AOTed jar is starting with compilation error
+                       ;; See this for using 'negative lookbehind' https://www.regular-expressions.info/lookaround.html
+                       :uberjar-exclusions [#"(?<!clojure/core/specs/alpha)\.(clj|java)"]
                        :jvm-opts ["-Dclojure.compiler.direct-linking=true"]}})
